@@ -24,6 +24,18 @@ Default client scope by id for a client by id
 .. autoclass:: keycloak_admin_aio._resources.clients.by_id.default_client_scopes.by_id.ClientsByIdDefaultClientScopesById
    :members:
 
+Optional client scopes for a client by id
+----------------------------------------
+
+.. autoclass:: keycloak_admin_aio._resources.clients.by_id.optional_client_scopes.ClientsByIdOptionalClientScopes
+   :members:
+
+Optional client scope by id for a client by id
+---------------------------------------------
+
+.. autoclass:: keycloak_admin_aio._resources.clients.by_id.optional_client_scopes.by_id.ClientsByIdOptionalClientScopesById
+   :members:
+
 User sessions for client by id
 ------------------------------
 
