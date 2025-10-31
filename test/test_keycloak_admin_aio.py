@@ -1,4 +1,5 @@
 import asyncio
+import pprint
 
 import pytest
 import test_roles
@@ -32,3 +33,30 @@ async def test_only_one_session(keycloak_admin: KeycloakAdmin):
 
     if sessions_count_before + 1 != sessions_count_after:
         pytest.fail("KeycloakAdmin created instantiated to many sessions.")
+
+
+async def test_get_authflows(keycloak_admin: KeycloakAdmin):
+    response = await keycloak_admin.get(
+        resource_url="authentication/flows", params_dict={}
+    )
+    pprint.pprint(response)
+    if len(response) == 0:
+        pytest.fail("Unable to retrieve authenticationflows.")
+
+
+async def test_get_authenticatorProviders(keycloak_admin: KeycloakAdmin):
+    response = await keycloak_admin.get(
+        resource_url="authentication/flows", params_dict={}
+    )
+    pprint.pprint(response)
+    if len(response) == 0:
+        pytest.fail("Unable to retrieve autheticatorProviders.")
+
+
+async def test_get_bruteForce_for_user(keycloak_admin: KeycloakAdmin):
+    response = await keycloak_admin.get(
+        resource_url="attack-detection/brute-force/users/testing", params_dict={}
+    )
+    pprint.pprint(response)
+    if len(response) == 0:
+        pytest.fail("Unable to retrieve bruteforce status for testing user.")

@@ -189,6 +189,20 @@ class KeycloakAdmin:
         """Get the admin api base url."""
         return f"{self._server_url}/admin/realms/{self._realm}"
 
+    async def get(self, resource_url: str, params_dict: dict[str, Any]) -> Any:
+        """Get untyped resource.
+
+        .. code:: python
+
+            untyped_resource = await kc.get(resource_url, params_dict)
+        """
+        connection = await self.__get_connection()
+        params = remove_none(params_dict)
+        response = await connection.get(
+            f"{self.get_url()}/{resource_url}", params=params
+        )
+        return response.json()
+
     async def close(self):
         """Closes open httpx connection."""
         await self.__connection.aclose()
