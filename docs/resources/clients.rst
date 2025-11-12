@@ -29,3 +29,9 @@ User sessions for client by id
 
 .. autoclass:: keycloak_admin_aio._resources.clients.by_id.user_sessions.ClientsByIdUserSessions
    :members:
+
+Roles for client by id
+------------------------------
+
+.. autoclass:: keycloak_admin_aio._resources.clients.by_id.roles.ClientsByIdRoles
+   :members:

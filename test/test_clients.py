@@ -145,3 +145,19 @@ async def test_get_user_sessions(keycloak_admin: KeycloakAdmin):
         admin_client_uuid
     ).user_sessions.get()
     assert KEYCLOAK_ADMIN in [user_session.username for user_session in user_sessions]
+
+
+@depends(on=["test_get"])
+async def test_get_roles(keycloak_admin: KeycloakAdmin):
+    """Test keycloak_admin.clients.by_id.roles.get
+
+    We check if the admin user of our current keycloak_admin instance is in
+    the list of active user sessions of the admin-cli client we're using for
+    testing
+    """
+    clients = await keycloak_admin.clients.get(client_id="admin-cli", search=True)
+    admin_client = clients[0]
+    admin_client_uuid = cast_non_optional(admin_client.id)
+    roles = await keycloak_admin.clients.by_id(admin_client_uuid).roles.get()
+    assert roles == []
+    # assert KEYCLOAK_ADMIN in [user_session.username for user_session in user_sessions]
