@@ -31,6 +31,7 @@ class Users(KeycloakResource):
         brief_representation: Optional[bool] = None,
         first: Optional[int] = None,
         max: Optional[int] = None,
+        q: Optional[str] = None,
         search: Optional[str] = None,
         email: Optional[str] = None,
         email_verified: Optional[bool] = None,
@@ -54,6 +55,7 @@ class Users(KeycloakResource):
                 "briefRepresentation": brief_representation,
                 "first": first,
                 "max": max,
+                "q": q,
                 "search": search,
                 "email": email,
                 "emailVerified": email_verified,
@@ -85,6 +87,7 @@ class Users(KeycloakResource):
 
     async def count(
         self,
+        q: Optional[str] = None,
         search: Optional[str] = None,
         email: Optional[str] = None,
         email_verified: Optional[bool] = None,
@@ -102,6 +105,7 @@ class Users(KeycloakResource):
         connection = await self._get_connection()
         params = remove_none(
             {
+                "q": q,
                 "search": search,
                 "email": email,
                 "emailVerified": email_verified,
