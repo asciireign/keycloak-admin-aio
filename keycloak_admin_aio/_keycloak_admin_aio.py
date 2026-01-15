@@ -203,6 +203,25 @@ class KeycloakAdmin:
         )
         return response.json()
 
+    async def update(
+        self,
+        resource_url: str,
+        params_dict: dict[str, Any],
+        representation: dict[str, Any],
+    ) -> bool:
+        """Update an untyped resource.
+
+        .. code:: python
+
+            untyped_resource = await kc.update(resource_url, params_dict, representation)
+        """
+        connection = await self.__get_connection()
+        params = remove_none(params_dict)
+        response = await connection.put(
+            f"{self.get_url()}/{resource_url}", params=params, json=representation
+        )
+        return response.is_success
+
     async def close(self):
         """Closes open httpx connection."""
         await self.__connection.aclose()
